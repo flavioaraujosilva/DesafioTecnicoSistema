@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     locales \
     zip \
+    unzip \
     sqlite3 \
     libsqlite3-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -24,10 +25,13 @@ WORKDIR /var/www/html
 COPY . .
 
 # Instalar as dependências do Composer
-RUN composer install
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
+# Corrigir permissões para o diretório de armazenamento e cache do Laravel
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Expor a porta 80 para o servidor Apache
 EXPOSE 80
 
 # Rodar o comando do Artisan para iniciar o servidor
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+CMD ["apache2-foreground"]

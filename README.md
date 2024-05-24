@@ -42,7 +42,7 @@ Este projeto é um sistema de gerenciamento de clientes desenvolvido com Next.js
 1. Clone o repositório
 
    ```bash
-   git clone <https://github.com/flavioaraujosilva/DesafioTecnicoSistema.git
+   git clone https://github.com/flavioaraujosilva/DesafioTecnicoSistema.git
    ```
 
 2. Instale as dependências do PHP:
